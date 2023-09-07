@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:verse_dashboard/features/auth/presentation/pages/auth_page.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 

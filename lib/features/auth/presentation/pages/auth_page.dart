@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_code/shared_code.dart';
 import 'package:verse_dashboard/constants/global_constants.dart';
+import 'package:verse_dashboard/features/auth/data/datasources/auth_datasource.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
@@ -14,7 +15,7 @@ class AuthPage extends StatefulWidget {
 class _AuthPageState extends State<AuthPage> {
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
+  AuthDatasource authDatasource = AuthDatasource();
   @override
   void initState() {
     userNameController.text = GC.userName;
@@ -61,7 +62,14 @@ class _AuthPageState extends State<AuthPage> {
                 VSpace(),
                 MainButton(
                   borerRadius: mediumBorderRadius,
-                  onTap: () {},
+                  onTap: () async {
+                    try {
+                      await authDatasource.auth(
+                        userNameController.text,
+                        passwordController.text,
+                      );
+                    } catch (e) {}
+                  },
                   title: 'Login',
                 ),
               ],
