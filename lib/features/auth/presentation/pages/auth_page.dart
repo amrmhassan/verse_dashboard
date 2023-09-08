@@ -5,6 +5,7 @@ import 'package:frontend/package/features/auth/verse_auth.dart';
 import 'package:shared_code/shared_code.dart';
 import 'package:verse_dashboard/constants/global_constants.dart';
 import 'package:verse_dashboard/features/auth/data/datasources/auth_datasource.dart';
+import 'package:verse_dashboard/utils/global_utils.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
@@ -64,12 +65,15 @@ class _AuthPageState extends State<AuthPage> {
                 MainButton(
                   borerRadius: mediumBorderRadius,
                   onTap: () async {
-                    print('before');
-                    var user = await VerseAuth.instance.loginEmailPassword(
-                      email: 'lloll111',
-                      password: 'lloll111',
-                    );
-                    print(user);
+                    try {
+                      await VerseAuth.instance.loginEmailPassword(
+                        email: userNameController.text,
+                        password: passwordController.text,
+                      );
+                    } catch (e) {
+                      GlobalUtils.errorSnackbar(
+                          'Please check your credentials');
+                    }
                   },
                   title: 'Login',
                 ),

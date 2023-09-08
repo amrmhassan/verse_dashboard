@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/package/features/auth/models/user_model.dart';
 import 'package:frontend/package/features/auth/verse_auth.dart';
+import 'package:verse_dashboard/constants/runtime_variables.dart';
 import 'package:verse_dashboard/features/auth/presentation/pages/auth_page.dart';
 import 'package:verse_dashboard/init/verse_init.dart';
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       title: 'Verse Dashboard',
       theme: ThemeData(
