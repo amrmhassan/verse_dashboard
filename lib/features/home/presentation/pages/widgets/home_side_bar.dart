@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_code/shared_code/constants/sizes.dart';
+import 'package:shared_code/shared_code/extensions/string.dart';
 import 'package:verse_dashboard/features/home/data/constants/app_sections.dart';
 
 class HomeSideBar extends StatelessWidget {
@@ -25,7 +26,7 @@ class HomeSideBar extends StatelessWidget {
                     onTap: () {
                       setActiveSection(e);
                     },
-                    title: Text(e),
+                    title: Text(e.capitalize),
                   ),
                 ),
               )
