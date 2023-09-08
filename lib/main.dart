@@ -3,6 +3,7 @@ import 'package:frontend/package/features/auth/models/user_model.dart';
 import 'package:frontend/package/features/auth/verse_auth.dart';
 import 'package:verse_dashboard/constants/runtime_variables.dart';
 import 'package:verse_dashboard/features/auth/presentation/pages/auth_page.dart';
+import 'package:verse_dashboard/features/home/presentation/pages/home_page.dart';
 import 'package:verse_dashboard/init/verse_init.dart';
 
 void main() async {
@@ -30,18 +31,7 @@ class MyApp extends StatelessWidget {
             if (user == null) {
               return const AuthPage();
             } else {
-              return Scaffold(
-                body: Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      VerseAuth.instance.logout(logoutFromBackend: false);
-                    },
-                    child: const Text(
-                      'Logout',
-                    ),
-                  ),
-                ),
-              );
+              return const HomePage();
             }
           }),
     );
