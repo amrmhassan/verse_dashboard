@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:frontend/package/features/auth/verse_auth.dart';
 import 'package:shared_code/shared_code.dart';
 import 'package:verse_dashboard/constants/global_constants.dart';
 import 'package:verse_dashboard/features/auth/data/datasources/auth_datasource.dart';
@@ -63,12 +64,12 @@ class _AuthPageState extends State<AuthPage> {
                 MainButton(
                   borerRadius: mediumBorderRadius,
                   onTap: () async {
-                    try {
-                      await authDatasource.auth(
-                        userNameController.text,
-                        passwordController.text,
-                      );
-                    } catch (e) {}
+                    print('before');
+                    var user = await VerseAuth.instance.loginEmailPassword(
+                      email: 'lloll111',
+                      password: 'lloll111',
+                    );
+                    print(user);
                   },
                   title: 'Login',
                 ),
