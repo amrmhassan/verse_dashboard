@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:verse_dashboard/features/home/data/constants/app_sections.dart';
+import 'package:verse_dashboard/features/home/presentation/pages/widgets/add_api_key_floating_button.dart';
 
 class HomeFloatingActionButton extends StatelessWidget {
   final String activeSection;
@@ -14,10 +15,7 @@ class HomeFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (activeSection == AppSections.apps) {
-      return FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.add),
-      );
+      return AddApiKeyFloatingButton();
     }
     return SizedBox();
   }
