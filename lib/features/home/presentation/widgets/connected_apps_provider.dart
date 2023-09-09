@@ -8,6 +8,7 @@ class ConnectedAppsProvider extends ChangeNotifier {
   List<ApiKeyModel> get apiKeys => [..._apiKeys];
   bool loading = false;
   bool creating = false;
+  bool toggling = false;
 
   Future<void> loadApiKeys() async {
     if (_apiKeys.isNotEmpty) return;
@@ -43,5 +44,25 @@ class ConnectedAppsProvider extends ChangeNotifier {
       notifyListeners();
       rethrow;
     }
+  }
+
+  Future<void> toggleApiActiveness(String apiHash) async {
+    toggling = true;
+    notifyListeners();
+    try {
+      var model = await _datasource.toggleApiKeyActiveness(apiHash);
+      _updateModel(model);
+      toggling = false;
+      notifyListeners();
+    } catch (e) {
+      toggling = false;
+      notifyListeners();
+      rethrow;
+    }
+  }
+
+  void _updateModel(ApiKeyModel newModel) {
+    int index = _apiKeys.indexWhere((element) => element.hash == newModel.hash);
+    _apiKeys[index] = newModel;
   }
 }

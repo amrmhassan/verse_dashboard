@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:shared_code/shared_code.dart';
 import 'package:verse_dashboard/features/home/data/models/api_key_model.dart';
 import 'package:shared_code/shared_code/widgets/custom_card.dart';
+import 'package:verse_dashboard/features/home/presentation/pages/widgets/toggle_api_activeness.dart';
 import 'package:verse_dashboard/utils/global_utils.dart';
 
 class ConnectedAppCard extends StatelessWidget {
@@ -45,11 +46,7 @@ class ConnectedAppCard extends StatelessWidget {
                   color: customColors.dangerColor,
                 ),
               ),
-              if (!expired)
-                Checkbox(
-                  value: model.active,
-                  onChanged: (value) {},
-                ),
+              if (!expired) ToggleApiKeyActiveness(model: model),
             ],
           ),
           Row(

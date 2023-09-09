@@ -26,4 +26,15 @@ class ApiKeysDatasource {
 
     return apiKeyModel;
   }
+
+  Future<ApiKeyModel> toggleApiKeyActiveness(String apiHah) async {
+    var res = await dio.post(
+      EndpointsConstants.toggleApiKeyActiveness,
+      data: {
+        BodyFields.apiHash: apiHah,
+      },
+    );
+    var apiKeyModel = ApiKeyModel.fromJson(res.data['data']);
+    return apiKeyModel;
+  }
 }
