@@ -9,6 +9,7 @@ import 'package:verse_dashboard/utils/global_utils.dart';
 
 class ConnectedAppCard extends StatelessWidget {
   final ApiKeyModel model;
+
   const ConnectedAppCard({
     super.key,
     required this.model,
@@ -16,6 +17,8 @@ class ConnectedAppCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var remainingDays = _getRemainingDays(model);
+    bool expired = remainingDays != null && remainingDays.isNegative;
     return CustomCard(
       borderRadius: mediumBorderRadius,
       shadowColor: Colors.grey.withOpacity(.1),
@@ -42,17 +45,24 @@ class ConnectedAppCard extends StatelessWidget {
                   color: customColors.dangerColor,
                 ),
               ),
-              Checkbox(value: model.active, onChanged: (value) {}),
+              if (!expired)
+                Checkbox(
+                  value: model.active,
+                  onChanged: (value) {},
+                ),
             ],
           ),
           Row(
             children: [
               Expanded(
                 child: Text(
-                  model.expireAfter == null
+                  remainingDays == null
                       ? 'Never expires'
-                      : 'Expires after ${_getApiKeyLife(model.expireAfter!)}',
-                  style: h4TextStyleInactive,
+                      : expired
+                          ? 'Expired!'
+                          : 'Expires after ${_getApiKeyLife(remainingDays)}',
+                  style: h4TextStyleInactive.copyWith(
+                      color: expired ? customColors.dangerColor : null),
                 ),
               ),
               Text(
@@ -78,6 +88,15 @@ class ConnectedAppCard extends StatelessWidget {
       ),
     );
   }
+}
+
+Duration? _getRemainingDays(ApiKeyModel model) {
+  if (model.expireAfter == null) return null;
+  Duration expireAfter = model.expireAfter!;
+  DateTime now = DateTime.now();
+  DateTime endDate = model.createdAt.add(expireAfter);
+  Duration diff = endDate.difference(now);
+  return diff;
 }
 
 String _getApiKeyLife(Duration duration) {

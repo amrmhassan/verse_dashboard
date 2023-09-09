@@ -72,8 +72,12 @@ class _AddApiKeyFloatingButtonState extends State<AddApiKeyFloatingButton> {
                         String name = nameController.text;
                         if (name.isEmpty) return;
                         try {
-                          await ProviderCalls.cAPF(context)
-                              .generateApiKey(nameController.text);
+                          int days = int.tryParse(daysController.text) ?? 0;
+                          await ProviderCalls.cAPF(context).generateApiKey(
+                            nameController.text,
+                            expireAfter:
+                                days == 0 ? null : Duration(days: days),
+                          );
                           GlobalUtils.successSnackbar('App added');
                           Navigator.pop(context);
                         } catch (e) {

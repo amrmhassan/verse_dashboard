@@ -43,17 +43,19 @@ class _ConnectedAppsState extends State<ConnectedApps> {
         horizontal: kHPad,
         vertical: kVPad / 2,
       ),
-      child: ListView(
-          padding: EdgeInsets.symmetric(
-            horizontal: kHPad / 2,
-          ),
-          children: cap.apiKeys
-              .map(
-                (e) => ConnectedAppCard(
-                  model: e,
-                ),
-              )
-              .toList()),
+      child: cap.apiKeys.isEmpty
+          ? Text("No apps connected yet!")
+          : ListView(
+              padding: EdgeInsets.symmetric(
+                horizontal: kHPad / 2,
+              ),
+              children: cap.apiKeys
+                  .map(
+                    (e) => ConnectedAppCard(
+                      model: e,
+                    ),
+                  )
+                  .toList()),
     );
   }
 }
