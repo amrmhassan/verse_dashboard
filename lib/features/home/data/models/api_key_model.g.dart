@@ -14,6 +14,7 @@ ApiKeyModel _$ApiKeyModelFromJson(Map<String, dynamic> json) => ApiKeyModel(
           ? null
           : Duration(microseconds: json['expireAfter'] as int),
       hash: json['hash'] as String,
+      active: json['active'] as bool,
     );
 
 Map<String, dynamic> _$ApiKeyModelToJson(ApiKeyModel instance) =>
@@ -21,6 +22,7 @@ Map<String, dynamic> _$ApiKeyModelToJson(ApiKeyModel instance) =>
       'name': instance.name,
       'apiKey': instance.apiKey,
       'createdAt': const DateConverter().toJson(instance.createdAt),
-      'expireAfter': instance.expireAfter?.inMicroseconds,
       'hash': instance.hash,
+      'active': instance.active,
+      'expireAfter': instance.expireAfter?.inMicroseconds,
     };

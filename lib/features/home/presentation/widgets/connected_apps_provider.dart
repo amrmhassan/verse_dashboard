@@ -14,7 +14,7 @@ class ConnectedAppsProvider extends ChangeNotifier {
     loading = true;
     notifyListeners();
     try {
-      _apiKeys = await _datasource.loadApiKeys();
+      _apiKeys = (await _datasource.loadApiKeys()).reversed.toList();
       loading = false;
       notifyListeners();
     } catch (e) {
@@ -35,7 +35,7 @@ class ConnectedAppsProvider extends ChangeNotifier {
         name,
         expireAfter: expireAfter,
       );
-      _apiKeys.add(model);
+      _apiKeys.insert(0, model);
       creating = false;
       notifyListeners();
     } catch (e) {

@@ -9,6 +9,7 @@ class ApiKeyModel {
   final String apiKey;
   final DateTime createdAt;
   final String hash;
+  final bool active;
 
   /// this can be null, to add the option to lifetime api keys
   final Duration? expireAfter;
@@ -19,16 +20,8 @@ class ApiKeyModel {
     required this.createdAt,
     required this.expireAfter,
     required this.hash,
+    required this.active,
   });
-
-  String toQuery() {
-    String createdAtString = createdAt.toIso8601String();
-    String? expiryDateString = expireAfter?.inSeconds.toString();
-    String expiryDateFinal =
-        expiryDateString == null ? '' : '|$expiryDateString';
-    String fullQuery = '$name|$apiKey|$createdAtString$expiryDateFinal';
-    return fullQuery;
-  }
 
   factory ApiKeyModel.fromJson(Map<String, dynamic> json) =>
       _$ApiKeyModelFromJson(json);

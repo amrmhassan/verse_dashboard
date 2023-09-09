@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:shared_code/shared_code/constants/sizes.dart';
+import 'package:verse_dashboard/features/home/presentation/pages/widgets/connected_app_card.dart';
 import 'package:verse_dashboard/utils/provider_calls.dart';
 
 class ConnectedApps extends StatefulWidget {
@@ -43,9 +44,14 @@ class _ConnectedAppsState extends State<ConnectedApps> {
         vertical: kVPad / 2,
       ),
       child: ListView(
+          padding: EdgeInsets.symmetric(
+            horizontal: kHPad / 2,
+          ),
           children: cap.apiKeys
               .map(
-                (e) => Text(e.hash.substring(0, 10)),
+                (e) => ConnectedAppCard(
+                  model: e,
+                ),
               )
               .toList()),
     );
