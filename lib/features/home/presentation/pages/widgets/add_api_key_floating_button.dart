@@ -69,7 +69,7 @@ class _AddApiKeyFloatingButtonState extends State<AddApiKeyFloatingButton> {
                     MainButton(
                       active: !cap.creating,
                       onTap: () async {
-                        String name = nameController.text;
+                        String name = nameController.text.trim();
                         if (name.isEmpty) return;
                         try {
                           int days = int.tryParse(daysController.text) ?? 0;

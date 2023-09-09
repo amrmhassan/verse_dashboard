@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:shared_code/shared_code.dart';
 import 'package:verse_dashboard/features/home/data/models/api_key_model.dart';
 import 'package:shared_code/shared_code/widgets/custom_card.dart';
+import 'package:verse_dashboard/features/home/presentation/pages/widgets/delete_api_key.dart';
 import 'package:verse_dashboard/features/home/presentation/pages/widgets/toggle_api_activeness.dart';
 import 'package:verse_dashboard/utils/global_utils.dart';
 
@@ -39,13 +40,7 @@ class ConnectedAppCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.delete,
-                  color: customColors.dangerColor,
-                ),
-              ),
+              DeleteApiKey(model: model),
               if (!expired) ToggleApiKeyActiveness(model: model),
             ],
           ),

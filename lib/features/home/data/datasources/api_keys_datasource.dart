@@ -37,4 +37,10 @@ class ApiKeysDatasource {
     var apiKeyModel = ApiKeyModel.fromJson(res.data['data']);
     return apiKeyModel;
   }
+
+  Future<void> deleteApiKey(String apiHash) async {
+    await dio.delete(EndpointsConstants.deleteApiKey, data: {
+      BodyFields.apiHash: apiHash,
+    });
+  }
 }

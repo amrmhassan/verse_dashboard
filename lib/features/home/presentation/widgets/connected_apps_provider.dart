@@ -9,6 +9,7 @@ class ConnectedAppsProvider extends ChangeNotifier {
   bool loading = false;
   bool creating = false;
   bool toggling = false;
+  bool deleting = false;
 
   Future<void> loadApiKeys() async {
     if (_apiKeys.isNotEmpty) return;
@@ -56,6 +57,21 @@ class ConnectedAppsProvider extends ChangeNotifier {
       notifyListeners();
     } catch (e) {
       toggling = false;
+      notifyListeners();
+      rethrow;
+    }
+  }
+
+  Future<void> deleteApiHash(String apiHash) async {
+    deleting = true;
+    notifyListeners();
+    try {
+      await _datasource.deleteApiKey(apiHash);
+      _apiKeys.removeWhere((element) => element.hash == apiHash);
+      deleting = false;
+      notifyListeners();
+    } catch (e) {
+      deleting = false;
       notifyListeners();
       rethrow;
     }
