@@ -8,8 +8,8 @@ class ConnectedAppsProvider extends ChangeNotifier {
   List<ApiKeyModel> get apiKeys => [..._apiKeys];
   bool loading = false;
   bool creating = false;
-  bool toggling = false;
-  bool deleting = false;
+  String? toggling;
+  String? deleting;
 
   Future<void> loadApiKeys() async {
     if (_apiKeys.isNotEmpty) return;
@@ -48,30 +48,30 @@ class ConnectedAppsProvider extends ChangeNotifier {
   }
 
   Future<void> toggleApiActiveness(String apiHash) async {
-    toggling = true;
+    toggling = apiHash;
     notifyListeners();
     try {
       var model = await _datasource.toggleApiKeyActiveness(apiHash);
       _updateModel(model);
-      toggling = false;
+      toggling = null;
       notifyListeners();
     } catch (e) {
-      toggling = false;
+      toggling = null;
       notifyListeners();
       rethrow;
     }
   }
 
   Future<void> deleteApiHash(String apiHash) async {
-    deleting = true;
+    deleting = apiHash;
     notifyListeners();
     try {
       await _datasource.deleteApiKey(apiHash);
       _apiKeys.removeWhere((element) => element.hash == apiHash);
-      deleting = false;
+      deleting = null;
       notifyListeners();
     } catch (e) {
-      deleting = false;
+      deleting = null;
       notifyListeners();
       rethrow;
     }

@@ -15,7 +15,7 @@ class DeleteApiKey extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cap = ProviderCalls.cAP(context);
-    return cap.deleting
+    return cap.deleting == model.hash
         ? CircularProgressIndicator(
             strokeWidth: 2,
           )

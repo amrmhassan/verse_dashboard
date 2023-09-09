@@ -16,7 +16,7 @@ class ToggleApiKeyActiveness extends StatelessWidget {
   Widget build(BuildContext context) {
     var cap = ProviderCalls.cAP(context);
 
-    return cap.toggling
+    return cap.toggling == model.hash
         ? CircularProgressIndicator(
             strokeWidth: 2,
           )
