@@ -8,6 +8,9 @@ import 'package:verse_dashboard/features/home/presentation/pages/home_page.dart'
 import 'package:verse_dashboard/features/home/presentation/widgets/connected_apps_provider.dart';
 import 'package:verse_dashboard/init/verse_init.dart';
 
+// flutter packages pub run build_runner build --delete-conflicting-outputs
+// flutter pub run build_runner watch --delete-conflicting-outputs
+
 void main() async {
   await VerseInit.init();
   runApp(const MyApp());

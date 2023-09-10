@@ -15,6 +15,8 @@ ApiKeyModel _$ApiKeyModelFromJson(Map<String, dynamic> json) => ApiKeyModel(
           : Duration(microseconds: json['expireAfter'] as int),
       hash: json['hash'] as String,
       active: json['active'] as bool,
+      apiSecretKeyEncrypted: json['apiSecretKeyEncrypted'] as String,
+      apiSecretKeyDecrypted: json['apiSecretKeyDecrypted'] as String?,
     );
 
 Map<String, dynamic> _$ApiKeyModelToJson(ApiKeyModel instance) =>
@@ -25,4 +27,6 @@ Map<String, dynamic> _$ApiKeyModelToJson(ApiKeyModel instance) =>
       'hash': instance.hash,
       'active': instance.active,
       'expireAfter': instance.expireAfter?.inMicroseconds,
+      'apiSecretKeyEncrypted': instance.apiSecretKeyEncrypted,
+      'apiSecretKeyDecrypted': instance.apiSecretKeyDecrypted,
     };

@@ -13,6 +13,8 @@ class ApiKeyModel {
 
   /// this can be null, to add the option to lifetime api keys
   final Duration? expireAfter;
+  final String apiSecretKeyEncrypted;
+  final String? apiSecretKeyDecrypted;
 
   const ApiKeyModel({
     required this.name,
@@ -21,6 +23,8 @@ class ApiKeyModel {
     required this.expireAfter,
     required this.hash,
     required this.active,
+    required this.apiSecretKeyEncrypted,
+    this.apiSecretKeyDecrypted,
   });
 
   factory ApiKeyModel.fromJson(Map<String, dynamic> json) =>
